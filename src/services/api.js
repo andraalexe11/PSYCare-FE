@@ -53,6 +53,53 @@ export const getUnassignedPatients = async (token) => {
   }
 };
 
+export const getAssignedPatients = async (token) => {
+  try {
+    const response = await fetch(`${API_URL}/psychologists/me/patients/assigned`, {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${token}`, 
+        'Content-Type': 'application/json'
+      }
+    });
+    
+    if (!response.ok) {
+      throw new Error(`Error: ${response.status}`);
+    }
+    return await response.json();
+  } catch (error) {
+    console.error('Failed to fetch assigned patients:', error);
+    return { 
+      success: false, 
+      message: error.message || 'Cannot fetch assigned patients' 
+    };
+  }
+};
+
+export const getSharedJournalEntries = async (token) => {
+  try {
+    const response = await fetch(`${API_URL}/journal/shared`, {
+      method: 'GET',
+      headers: {
+        'Authorization': `Bearer ${token}`, 
+        'Content-Type': 'application/json'
+      }
+    });
+    
+    if (!response.ok) {
+      throw new Error(`Error: ${response.status}`);
+    }
+    return await response.json();
+  } catch (error) {
+    console.error('Failed to fetch journal entries:', error);
+    return { 
+      success: false, 
+      message: error.message || 'Cannot fetch journal entries' 
+    };
+  }
+};
+
+
 export const loginUser = async (credentials) => {
   try {
     console.log('Attempting login for:', credentials.username);
