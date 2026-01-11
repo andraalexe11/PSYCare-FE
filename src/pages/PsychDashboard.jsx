@@ -4,6 +4,8 @@ import '../App.css';
 import '../components/Header'
 import Header from '../components/Header';
 import { useNavigate } from 'react-router-dom';
+import { useBreakReminder } from '../hooks/useBreakReminder';
+import BreakReminderModal from '../components/BreakReminderModal';
 
 
 const PsychDashboard = () => {
@@ -17,6 +19,7 @@ const PsychDashboard = () => {
   const [selectedPatients, setSelectedPatients] = useState(null);
   const [loadingSelectedPatients, setLoadingSelectedPatients] = useState(false);
   const [showBookingModal, setShowBookingModal] = useState(false);
+  const { showBreak, countdown } = useBreakReminder(1); 
   const [bookingData, setBookingData] = useState({
     id: '',
     date: '',         
@@ -676,6 +679,7 @@ const handleAssignPatient = async (patientId, patientName) => {
                 </form>
               </div>
           )}
+          {showBreak && <BreakReminderModal countdown={countdown} />}
         </div>
       </div>
     </div>
