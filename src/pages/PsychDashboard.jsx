@@ -19,7 +19,7 @@ const PsychDashboard = () => {
   const [selectedPatients, setSelectedPatients] = useState(null);
   const [loadingSelectedPatients, setLoadingSelectedPatients] = useState(false);
   const [showBookingModal, setShowBookingModal] = useState(false);
-  const { showBreak, countdown } = useBreakReminder(3); 
+  const { showBreak, countdown } = useBreakReminder(30); 
   const [bookingData, setBookingData] = useState({
     id: '',
     date: '',         
@@ -607,8 +607,8 @@ const handleAssignPatient = async (patientId, patientName) => {
                     <label>Patient ID *</label>
                     <input
                       type="text"
-                      name="patientId"
-                      value={bookingData.patientId}
+                      name="id"
+                      value={bookingData.id}
                       onChange={handleBookingChange}
                       required
                       disabled={bookingLoading}
