@@ -87,14 +87,15 @@ const LoginPage = () => {
               disabled={isLoading}
             />
           </div>
-          
-          <button 
-            type="submit" 
-            className="login-btn"
-            disabled={isLoading}
-          >
-            {isLoading ? 'Logging in...' : 'Login'}
-          </button>
+          <div className="form-buttons">
+            <button 
+              type="submit" 
+              className="login-btn glass-btn"
+              disabled={isLoading}
+            >
+              {isLoading ? 'Logging in...' : 'Login'}
+            </button>
+          </div>
         </form>
         
       </div>

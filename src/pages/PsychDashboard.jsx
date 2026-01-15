@@ -19,7 +19,7 @@ const PsychDashboard = () => {
   const [selectedPatients, setSelectedPatients] = useState(null);
   const [loadingSelectedPatients, setLoadingSelectedPatients] = useState(false);
   const [showBookingModal, setShowBookingModal] = useState(false);
-  const { showBreak, countdown } = useBreakReminder(1); 
+  const { showBreak, countdown } = useBreakReminder(3); 
   const [bookingData, setBookingData] = useState({
     id: '',
     date: '',         
