@@ -45,7 +45,7 @@ const PsychologistRegister = () => {
         
         console.log('Auto-login successful, redirecting to dashboard...');
         
-        navigate('/dashboard');
+        navigate('/psych-dashboard');
       } else {
         console.warn('Auto-login failed:', loginResult.message);
         alert('Account created! Please log in manually.');
