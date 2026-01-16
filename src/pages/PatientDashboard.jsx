@@ -9,6 +9,7 @@ import {
   getTodayMood,
 } from "../services/api";
 import Header from "../components/Header";
+import "../styles/patient-dashboard.css";
 
 const PatientDashboard = () => {
   const [journals, setJournals] = useState([]);
@@ -98,7 +99,7 @@ const PatientDashboard = () => {
     <div>
       <Header />
       <div className="dashboard-container">
-        <h2>Patient Dashboard</h2>
+        <h2 className="page-title">Patient Dashboard</h2>
 
         {/* Mood Check-in */}
         <div className="card">
@@ -153,9 +154,11 @@ const PatientDashboard = () => {
               <div key={j.id} className="journal-item">
                 <h4>{j.title}</h4>
                 <p>{j.text}</p>
-                <button onClick={() => handleEdit(j)}>Edit</button>
-                <button onClick={() => handleDelete(j.id)}>Delete</button>
-                <button onClick={() => handleShare(j.id)}>Share</button>
+                <div className="journal-actions">
+                  <button onClick={() => handleEdit(j)}>Edit</button>
+                  <button onClick={() => handleDelete(j.id)}>Delete</button>
+                  <button onClick={() => handleShare(j.id)}>Share</button>
+                </div>
               </div>
             ))
           ) : (

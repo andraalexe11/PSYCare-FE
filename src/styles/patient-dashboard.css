@@ -1,0 +1,122 @@
+/* Page background */
+body {
+  font-family: "Inter", system-ui, sans-serif;
+  background: linear-gradient(135deg, #a1c4fd, #c2e9fb);
+  min-height: 100vh;
+}
+
+/* Main container */
+.dashboard-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem 1rem 4rem;
+}
+
+/* Title */
+.page-title {
+  text-align: center;
+  font-size: 2.2rem;
+  margin-bottom: 2rem;
+  color: #1f2937;
+}
+
+/* Glass cards */
+.card {
+  background: rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(12px);
+  border-radius: 16px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+}
+
+/* Card headers */
+.card h3 {
+  margin-bottom: 1rem;
+  color: #111827;
+}
+
+/* Inputs */
+.card input,
+.card textarea {
+  width: 100%;
+  padding: 0.7rem 0.8rem;
+  margin-bottom: 0.8rem;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  outline: none;
+  font-size: 0.95rem;
+}
+
+.card textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+/* Mood slider */
+input[type="range"] {
+  width: 100%;
+  margin: 0.5rem 0;
+}
+
+.mood-label {
+  display: inline-block;
+  margin-top: 0.3rem;
+  font-weight: 500;
+}
+
+/* Buttons */
+button {
+  border: none;
+  border-radius: 10px;
+  padding: 0.45rem 0.9rem;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.2s ease;
+}
+
+button:hover {
+  transform: translateY(-1px);
+}
+
+/* Primary glass button */
+.glass-btn {
+  background: linear-gradient(135deg, #6366f1, #3b82f6);
+  color: white;
+  margin-top: 0.5rem;
+}
+
+.glass-btn:hover {
+  opacity: 0.9;
+}
+
+/* Journal items */
+.journal-item {
+  background: rgba(255, 255, 255, 0.55);
+  border-radius: 14px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.journal-item h4 {
+  margin-bottom: 0.3rem;
+}
+
+.journal-item p {
+  margin-bottom: 0.7rem;
+  color: #374151;
+}
+
+/* Journal action buttons */
+.journal-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.journal-actions button {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.journal-actions button:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
