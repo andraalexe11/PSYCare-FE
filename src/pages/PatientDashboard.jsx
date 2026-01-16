@@ -96,7 +96,7 @@ const PatientDashboard = () => {
   };
 
   return (
-    <div>
+    <div className="patient-dashboard">
       <Header />
       <div className="dashboard-container">
         <h2 className="page-title">Patient Dashboard</h2>
