@@ -6,6 +6,7 @@ import {
   deleteJournal,
   shareJournal,
   submitMood,
+  getTodayMood,
 } from "../services/api";
 import Header from "../components/Header";
 
@@ -15,6 +16,9 @@ const PatientDashboard = () => {
   const [title, setTitle] = useState("");
   const [editingId, setEditingId] = useState(null);
   const [mood, setMood] = useState(5);
+  const [todayMood, setTodayMood] = useState(null);
+  const [moodChecked, setMoodChecked] = useState(false);
+
   const token = localStorage.getItem("token");
 
   const loadJournals = useCallback(async () => {
@@ -25,6 +29,22 @@ const PatientDashboard = () => {
   useEffect(() => {
     loadJournals();
   }, [loadJournals]);
+
+  useEffect(() => {
+    const loadTodayMood = async () => {
+      try {
+        const data = await getTodayMood(token);
+        if (data) {
+          setTodayMood(data);
+          setMoodChecked(true);
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    loadTodayMood();
+  }, [token]);
 
   const handleSave = async () => {
     if (editingId) {
@@ -52,16 +72,26 @@ const PatientDashboard = () => {
   };
 
   const handleShare = async (id) => {
-    const psychologistId = prompt("Enter psychologist ID:");
-    if (psychologistId) {
-      await shareJournal(id, parseInt(psychologistId), token);
-      alert("Shared successfully");
+    try {
+      const res = await shareJournal(id, token);
+      alert(res.message);
+      loadJournals();
+    } catch {
+      alert("Failed to share journal");
     }
   };
 
   const handleMoodSubmit = async () => {
-    await submitMood({ mood }, token);
-    alert("Mood submitted");
+    try {
+      await submitMood({ value: mood }, token);
+      alert("Mood submitted");
+
+      // Lock the UI immediately
+      setTodayMood({ value: mood });
+      setMoodChecked(true);
+    } catch (err) {
+      alert("You already submitted your mood today.");
+    }
   };
 
   return (
@@ -73,17 +103,28 @@ const PatientDashboard = () => {
         {/* Mood Check-in */}
         <div className="card">
           <h3>Daily Mood Check</h3>
-          <input
-            type="range"
-            min="1"
-            max="10"
-            value={mood}
-            onChange={(e) => setMood(e.target.value)}
-          />
-          <span>Mood: {mood}</span>
-          <button className="glass-btn" onClick={handleMoodSubmit}>
-            Submit Mood
-          </button>
+
+          {moodChecked ? (
+            <p>
+              You’ve already checked in today 😊
+              <br />
+              <strong>Your mood:</strong> {todayMood?.value}
+            </p>
+          ) : (
+            <>
+              <input
+                type="range"
+                min="1"
+                max="10"
+                value={mood}
+                onChange={(e) => setMood(e.target.value)}
+              />
+              <span>Mood: {mood}</span>
+              <button className="glass-btn" onClick={handleMoodSubmit}>
+                Submit Mood
+              </button>
+            </>
+          )}
         </div>
 
         {/* Journal Form */}

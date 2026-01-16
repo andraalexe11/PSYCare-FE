@@ -335,11 +335,10 @@ export const deleteJournal = async (id, token) => {
   };
 };
 
-export const shareJournal = async (id, psychologistId, token) => {
+export const shareJournal = async (id, token) => {
   const res = await fetch(`${API_URL}/journal/${id}/share`, {
-    method: "POST",
+    method: "PUT",
     headers: authHeader(token),
-    body: JSON.stringify({ psychologistId }),
   });
 
   const text = await res.text();
@@ -363,4 +362,17 @@ export const submitMood = async (data, token) => {
     success: res.ok,
     message: text || "Mood submitted",
   };
+};
+
+export const getTodayMood = async (token) => {
+  const res = await fetch(`${API_URL}/mood/today`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  if (res.status === 204) return null;
+  if (!res.ok) throw new Error("Failed to fetch today's mood");
+
+  return res.json();
 };
